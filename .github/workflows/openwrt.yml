@@ -31,7 +31,7 @@ jobs:
           sudo -E apt-get clean
       - name: Download lede
         run: |
-          git clone --b v23.05.2 https://github.com/openwrt/openwrt
+          git clone -b v23.05.2 https://github.com/openwrt/openwrt
           cp .config ./openwrt/.config
           mv ./openwrt/* ./
       - name: Update feeds
