@@ -32,6 +32,7 @@ jobs:
       - name: Download lede
         run: |
           git clone https://github.com/openwrt/openwrt
+          git checkout v23.05.2
           cp .config ./openwrt/.config
           mv ./openwrt/* ./
       - name: Update feeds
@@ -55,4 +56,9 @@ jobs:
         with:
           name: OpenWrt_firmware
           path: bin/targets/
+      - name : Upload config
+        uses: actions/upload-artifact@master
+        with:
+          name: OpenWrt_Config
+          path: .config
           
