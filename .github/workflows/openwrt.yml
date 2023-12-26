@@ -33,6 +33,7 @@ jobs:
         run: |
           git clone -b v23.05.2 https://github.com/openwrt/openwrt
           cp .config ./openwrt/.config
+          cp -f mt7621_d-team_newifi-d2.dts ./openwrt/target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
           mv ./openwrt/* ./
       - name: Update feeds
         run: |
