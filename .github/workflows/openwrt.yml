@@ -43,9 +43,10 @@ jobs:
           ./scripts/feeds install -a
       - name: Costom configure file
         run: |
+          cat .config
           rm -rf .config.old
           make defconfig
-          cat .config
+          ./scripts/diffconfig.sh
       - name: Download package source code
         run: |
           make download -j8
