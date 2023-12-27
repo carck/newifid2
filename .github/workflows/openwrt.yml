@@ -35,6 +35,7 @@ jobs:
           cp .config ./openwrt/.config
           cp -f mt7621_d-team_newifi-d2.dts ./openwrt/target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
           mv ./openwrt/* ./
+          sed -i 's/git.openwrt.org\/feed/github.com\/openwrt/' feeds.conf.default
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
