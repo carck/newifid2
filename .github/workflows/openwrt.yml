@@ -43,6 +43,7 @@ jobs:
           ./scripts/feeds install -a
       - name: Costom configure file
         run: |
+          rm -rf .config.old
           make defconfig
           cat .config
       - name: Download package source code
