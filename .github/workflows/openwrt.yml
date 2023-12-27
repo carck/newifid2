@@ -32,7 +32,6 @@ jobs:
       - name: Download lede
         run: |
           git clone -b ${{vars.Tag}} https://github.com/openwrt/openwrt
-          cp .config ./openwrt/.config
           cp -f mt7621_d-team_newifi-d2.dts ./openwrt/target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
           mv ./openwrt/* ./
           sed -i 's/git.openwrt.org\/feed/github.com\/openwrt/' feeds.conf.default
@@ -43,8 +42,11 @@ jobs:
           ./scripts/feeds install -a
       - name: Costom configure file
         run: |
-          cat .config
+          rm -rf .config
           rm -rf .config.old
+          cp diffconfig .config
+          cat .config
+          cat target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
           make defconfig
           ./scripts/diffconfig.sh
       - name: Download package source code
