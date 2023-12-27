@@ -31,7 +31,7 @@ jobs:
           sudo -E apt-get clean
       - name: Download lede
         run: |
-          git clone -b v23.05.2 https://github.com/openwrt/openwrt
+          git clone -b ${{vars.Tag}} https://github.com/openwrt/openwrt
           cp .config ./openwrt/.config
           cp -f mt7621_d-team_newifi-d2.dts ./openwrt/target/linux/ramips/dts/mt7621_d-team_newifi-d2.dts
           mv ./openwrt/* ./
@@ -51,7 +51,7 @@ jobs:
       - name: Compile firmware
         run: |
           echo -e "$(nproc) thread build."
-          make -j$(nproc) V=s
+          make -j$(nproc) V=s LINUX_VERMAGIC:=${{vars.MAGIC}}
       - name : Upload artifact
         uses: actions/upload-artifact@master
         with:
